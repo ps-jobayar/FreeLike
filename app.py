@@ -1,6 +1,3 @@
-# MINISTER LIKE API SRC UID PASSWORD 
-# POWERED BY : @minister_69
-# CHANNEL : @minister_6T9
 from flask import Flask, request, jsonify
 import asyncio
 from Crypto.Cipher import AES
@@ -303,11 +300,7 @@ def get_player_info(encrypted_uid, server_name, token):
 def handle_requests():
     uid = request.args.get("uid")
     server_name = request.args.get("server_name", "").upper()
-    key = request.args.get("key")
     client_ip = request.remote_addr
-
-    if key != "JMLB":
-        return jsonify({"error": "Invalid or missing API key 🔑"}), 403
 
     if not uid or not server_name:
         return jsonify({"error": "UID and server_name are required"}), 400
@@ -399,7 +392,7 @@ def handle_requests():
             "PlayerNickname": player_name,
             "UID": player_id,
             "status": status,
-            "remains": f"({remains}/{KEY_LIMIT})",    
+            "remains": f"({remains}/{KEY_LIMIT})"
         })
     except Exception as e:
         return jsonify({"error": str(e), "status": 0}), 500
@@ -407,13 +400,9 @@ def handle_requests():
 @app.route('/reset-cache', methods=['GET'])
 def reset_cache():
     """Reset liked cache (use carefully)"""
-    key = request.args.get("key")
-    if key != "JMLB":
-        return jsonify({"error": "Invalid key"}), 403
-    
     global liked_cache
     liked_cache.clear()
-    return jsonify({"message": "Cache cleared", "credit": "@minister_69"})
+    return jsonify({"message": "Cache cleared"})
 
 if __name__ == '__main__':
     print("🚀 Server started - Smart Like System!")
@@ -424,6 +413,3 @@ if __name__ == '__main__':
     print("🧠 Smart feature: Tracks which accounts already liked")
     print("⚡ Only fresh accounts will send likes")
     app.run(host='0.0.0.0', port=5001, debug=True, use_reloader=False)
-# MINISTER LIKE API SRC UID PASSWORD 
-# POWERED BY : @minister_69
-# CHANNEL : @minister_6T9
